@@ -9,6 +9,8 @@ if robot == "blue":
 else :
     ET=3.14
     
+xb=0
+yb=0
 
 
 
@@ -18,8 +20,12 @@ with rsk.Client(host='172.19.66.163', key='') as client:
 
     ballsort=0
     while True:
-        xb=client.ball[0]
-        yb=client.ball[1]
+        print(client.ball)
+        if client.ball is None:
+            print('no',client.ball)
+        else:
+            xb=client.ball[0]
+            yb=client.ball[1]
 
         #bluex1=client.blue1.position[0]
         #bluey1=client.blue1.position[1]
@@ -34,10 +40,8 @@ with rsk.Client(host='172.19.66.163', key='') as client:
         '''
         gbx1=greenx1-bluex1
         gbx2=greenx1-bluex2
-
         gby1=greenx1-bluey1
         gby2=greenx1-bluey2
-
         print(xb,yb)
         print(greenx1,greeny1)
         '''
@@ -90,8 +94,11 @@ with rsk.Client(host='172.19.66.163', key='') as client:
             else:
                 ballsort=0
               
-        xb=client.ball[0]
-        yb=client.ball[1]   
+        if client.ball is None:
+            print('no',client.ball)
+        else:
+            xb=client.ball[0]
+            yb=client.ball[1]   
 
         if robotx > 0.6 :
             client.robots[robot][nombre].goto((robotx-0.1, roboty, ET), wait=False)
@@ -105,5 +112,6 @@ with rsk.Client(host='172.19.66.163', key='') as client:
             ballesort()
             if ballsort == 0:
                 versball()
+                
 
        #y 0.6 -0.6 x0.90 
